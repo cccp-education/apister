@@ -1,8 +1,8 @@
 {
-  "name": "api-app",
-  "version": "0.0.1-SNAPSHOT",
+  "name": "apister",
+  "version": "0.0.1",
   "private": true,
-  "description": "Description for Api App",
+  "description": "Description for Apister",
   "license": "UNLICENSED",
   "scripts": {
     "app:start": "./gradlew",

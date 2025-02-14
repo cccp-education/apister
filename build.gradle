@@ -29,9 +29,9 @@ plugins {
 }
 
 group = "api"
-version = "0.0.1-SNAPSHOT"
+version = libs.versions.api.get()
 
-description = ""
+description = "Apister workspace API application on top of jhipster"
 
 sourceCompatibility = 17
 targetCompatibility = 17

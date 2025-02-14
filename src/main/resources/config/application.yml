@@ -162,7 +162,7 @@ info:
 
 jhipster:
   clientApp:
-    name: 'apiApp'
+    name: 'apister'
   # By default CORS is disabled. Uncomment to enable.
   # cors:
   #   allowed-origins: "http://localhost:8100,http://localhost:9000"
@@ -176,15 +176,15 @@ jhipster:
   api-docs:
     default-include-pattern: /api/**
     management-include-pattern: /management/**
-    title: Api App API
-    description: Api App API documentation
+    title: Apister API
+    description: Apister API documentation
     version: 0.0.1
     terms-of-service-url:
     contact-name:
     contact-url:
     contact-email:
-    license: unlicensed
-    license-url:
+    license: GNU General Public License
+    license-url: https://www.gnu.org/licenses/lgpl-3.0.html#license-text
   security:
     content-security-policy: "default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com data:"
 # ===================================================================
