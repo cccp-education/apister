@@ -2,13 +2,56 @@
 jacoco = "0.8.12"
 checkstyle = "10.21.2"
 # jhipster-needle-gradle-dependency-catalog-version - JHipster will add additional versions for convention plugins heref
+api = "0.0.1"
+kotlin = "2.1.10"
+langchain4j = "1.0.0-beta1"
+jgit = "6.10.0.202406032230-r"
+arrow-kt = "1.2.4"
+arrow-kt_jackson = "0.14.1"
+kotlinx-serialization-json = "1.7.2"
+mockito-kotlin = "5.3.1"
+deps-versions = "0.52.0"
 
 [libraries]
 jhipster-framework = { module = "tech.jhipster:jhipster-framework", version = "8.9.0" }
 springdoc-openapi-starter-webflux-api = { module = "org.springdoc:springdoc-openapi-starter-webflux-api", version = "2.7.0" }
 commons-beanutils = { module = "commons-beanutils:commons-beanutils", version = "1.10.0" }
 # jhipster-needle-gradle-dependency-catalog-libraries - JHipster will add additional libraries versions
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test" }
+kotlin-test-junit5 = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit5" }
+xz = { group = "org.tukaani", name = "xz", version = "1.9" }
+langchain4j-core = { group = "dev.langchain4j", name = "langchain4j", version.ref = "langchain4j" }
+jackson-module-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin" }
+jgit-core = { group = "org.eclipse.jgit", name = "org.eclipse.jgit", version.ref = "jgit" }
+jgit-archive = { group = "org.eclipse.jgit", name = "org.eclipse.jgit.archive", version.ref = "jgit" }
+jgit-ssh = { group = "org.eclipse.jgit", name = "org.eclipse.jgit.ssh.jsch", version.ref = "jgit" }
+kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect" }
+kotlin-stdlib-jdk8 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockito-kotlin" }
+langchain4j-reactor = { group = "dev.langchain4j", name = "langchain4j-reactor", version.ref = "langchain4j" }
+langchain4j-spring-boot-starter = { group = "dev.langchain4j", name = "langchain4j-spring-boot-starter", version.ref = "langchain4j" }
+langchain4j-ollama-spring-boot-starter = { group = "dev.langchain4j", name = "langchain4j-ollama-spring-boot-starter", version.ref = "langchain4j" }
+langchain4j-hugging-face = { group = "dev.langchain4j", name = "langchain4j-hugging-face", version.ref = "langchain4j" }
+langchain4j-mistral-ai = { group = "dev.langchain4j", name = "langchain4j-mistral-ai", version.ref = "langchain4j" }
+langchain4j-web-search-engine-google-custom = { group = "dev.langchain4j", name = "langchain4j-web-search-engine-google-custom", version.ref = "langchain4j" }
+langchain4j-google-ai-gemini = { group = "dev.langchain4j", name = "langchain4j-google-ai-gemini", version.ref = "langchain4j" }
+langchain4j-pgvector = { group = "dev.langchain4j", name = "langchain4j-pgvector", version.ref = "langchain4j" }
+langchain4j-spring-boot-tests = { group = "dev.langchain4j", name = "langchain4j-spring-boot-tests", version.ref = "langchain4j" }
+arrow-core = { group = "io.arrow-kt", name = "arrow-core", version.ref = "arrow-kt" }
+arrow-fx-coroutines = { group = "io.arrow-kt", name = "arrow-fx-coroutines", version.ref = "arrow-kt" }
+arrow-integrations-jackson-module = { group = "io.arrow-kt", name = "arrow-integrations-jackson-module", version.ref = "arrow-kt_jackson" }
+reactor-kotlin-extensions = { group = "io.projectreactor.kotlin", name = "reactor-kotlin-extensions" }
+kotlinx-coroutines-reactor = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-reactor" }
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version = "3.4.2" }
 # jhipster-needle-gradle-dependency-catalog-plugins - JHipster will add additional plugins versions
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
+kotlin-noarg = { id = "org.jetbrains.kotlin.plugin.noarg", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+versions = { id = "com.github.ben-manes.versions", version.ref = "deps-versions" }
+[bundles]

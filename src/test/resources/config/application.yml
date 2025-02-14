@@ -18,7 +18,8 @@ spring:
     name: apiApp
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
-    contexts: test
+    contexts: test, faker
+    url: jdbc:postgresql://localhost:5432/apister?currentSchema=dev
   jackson:
     serialization:
       write-durations-as-timestamps: false
@@ -28,6 +29,10 @@ spring:
     allow-bean-definition-overriding: true
   messages:
     basename: i18n/messages
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/apister?currentSchema=test
+    username: dev
+    password: secret
   security:
     oauth2:
       resourceserver:

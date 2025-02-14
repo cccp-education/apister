@@ -1,15 +1,31 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    gradlePluginPortal()
+    google()
+    maven { url = "https://plugins.gradle.org/m2/" }
+  }
+  dependencies { classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.10") }
+}
+
 plugins {
-    id "java"
-    id "maven-publish"
-    id "idea"
-    id "eclipse"
-    id "com.gorylenko.gradle-git-properties"
-    alias(libs.plugins.spring.boot)
-    id "jhipster.docker-conventions"
-    id "jhipster.code-quality-conventions"
-    id "org.liquibase.gradle"
-    id "jhipster.node-gradle-conventions"
-    // jhipster-needle-gradle-plugins - JHipster will add additional gradle plugins here
+  id "java"
+  id "maven-publish"
+  id "idea"
+  id "eclipse"
+  id "com.gorylenko.gradle-git-properties"
+  alias(libs.plugins.spring.boot)
+  id "jhipster.docker-conventions"
+  id "jhipster.code-quality-conventions"
+  id "org.liquibase.gradle"
+  id "jhipster.node-gradle-conventions"
+  // jhipster-needle-gradle-plugins - JHipster will add additional gradle plugins here
+  alias(libs.plugins.kotlin.jvm)
+  alias(libs.plugins.kotlin.spring)
+  alias(libs.plugins.kotlin.allopen)
+  alias(libs.plugins.kotlin.noarg)
+  alias(libs.plugins.kotlin.serialization)
+  alias(libs.plugins.versions)
 }
 
 group = "api"
@@ -17,25 +33,25 @@ version = "0.0.1-SNAPSHOT"
 
 description = ""
 
-sourceCompatibility=17
-targetCompatibility=17
+sourceCompatibility = 17
+targetCompatibility = 17
 assert System.properties["java.specification.version"] == "17" || "21" || "23"
 
 ext {
-    springProfiles = ""
-    if (project.hasProperty("tls")) {
-        springProfiles += ",tls"
-    }
-    if (project.hasProperty("e2e")) {
-        springProfiles += ",e2e"
-    }
+  springProfiles = ""
+  if (project.hasProperty("tls")) {
+    springProfiles += ",tls"
+  }
+  if (project.hasProperty("e2e")) {
+    springProfiles += ",e2e"
+  }
 }
 
 repositories {
-    // Local maven repository is required for libraries built locally with maven like development jhipster-bom.
-    // mavenLocal()
-    mavenCentral()
-    // jhipster-needle-gradle-repositories - JHipster will add additional repositories
+  // Local maven repository is required for libraries built locally with maven like development jhipster-bom.
+  // mavenLocal()
+  mavenCentral()
+  // jhipster-needle-gradle-repositories - JHipster will add additional repositories
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -44,72 +60,72 @@ apply from: "gradle/liquibase.gradle"
 // jhipster-needle-gradle-apply-from - JHipster will add additional gradle scripts to be applied here
 
 if (project.hasProperty("prod")) {
-    apply from: "gradle/profile_prod.gradle"
+  apply from: "gradle/profile_prod.gradle"
 } else {
-    apply from: "gradle/profile_dev.gradle"
+  apply from: "gradle/profile_dev.gradle"
 }
 
 if (project.hasProperty("war")) {
-    apply from: "gradle/war.gradle"
+  apply from: "gradle/war.gradle"
 }
 
 
 idea {
-    module {
-        excludeDirs += files("node_modules")
-    }
+  module {
+    excludeDirs += files("node_modules")
+  }
 }
 
 eclipse {
-    sourceSets {
-        main {
-            java {
-                srcDirs += ["build/generated/sources/annotationProcessor/java/main"]
-            }
-        }
+  sourceSets {
+    main {
+      java {
+        srcDirs += ["build/generated/sources/annotationProcessor/java/main"]
+      }
     }
+  }
 }
 
 defaultTasks "bootRun"
 
 springBoot {
-    mainClass = "api.ApiApp"
+  mainClass = "api.ApiApp"
 }
 
 test {
-    useJUnitPlatform()
-    exclude "**/*IT*", "**/*IntTest*"
-    testLogging {
-        events 'FAILED', 'SKIPPED'
-    }
-    jvmArgs += '-Djava.security.egd=file:/dev/./urandom -Xmx512m'
-    // uncomment if the tests reports are not generated
-    // see https://github.com/jhipster/generator-jhipster/pull/2771 and https://github.com/jhipster/generator-jhipster/pull/4484
-    // ignoreFailures true
-    reports.html.required = false
-    testLogging.exceptionFormat "full"
+  useJUnitPlatform()
+  exclude "**/*IT*", "**/*IntTest*"
+  testLogging {
+    events 'FAILED', 'SKIPPED'
+  }
+  jvmArgs += '-Djava.security.egd=file:/dev/./urandom -Xmx512m'
+  // uncomment if the tests reports are not generated
+  // see https://github.com/jhipster/generator-jhipster/pull/2771 and https://github.com/jhipster/generator-jhipster/pull/4484
+  // ignoreFailures true
+  reports.html.required = false
+  testLogging.exceptionFormat "full"
 
-    if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_13)) {
-        jvmArgs += [
-            "-XX:+AllowRedefinitionToAddDeleteMethods"
-        ]
-    }
+  if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_13)) {
+    jvmArgs += [
+      "-XX:+AllowRedefinitionToAddDeleteMethods"
+    ]
+  }
 }
 
 check.dependsOn integrationTest
 task testReport(type: TestReport) {
-    destinationDirectory = file("$buildDir/reports/tests")
-    testResults.from(test)
+  destinationDirectory = file("$buildDir/reports/tests")
+  testResults.from(test)
 }
 
 task integrationTestReport(type: TestReport) {
-    destinationDirectory = file("$buildDir/reports/tests")
-    testResults.from(integrationTest)
+  destinationDirectory = file("$buildDir/reports/tests")
+  testResults.from(integrationTest)
 }
 
 gitProperties {
-    failOnNoGitDirectory = false
-    keys = ["git.branch", "git.commit.id.abbrev", "git.commit.id.describe"]
+  failOnNoGitDirectory = false
+  keys = ["git.branch", "git.commit.id.abbrev", "git.commit.id.describe"]
 }
 
 tasks.withType(com.gorylenko.GenerateGitPropertiesTask).configureEach {
@@ -117,73 +133,112 @@ tasks.withType(com.gorylenko.GenerateGitPropertiesTask).configureEach {
 }
 
 configurations {
-    providedRuntime
-    implementation.exclude module: "spring-boot-starter-tomcat"
+  providedRuntime
+  implementation.exclude module: "spring-boot-starter-tomcat"
 }
 
 dependencies {
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-hppc"
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
-    testImplementation("com.tngtech.archunit:archunit-junit5-api:${archunitJunit5Version}") {
-        exclude group: "org.slf4j", module: "slf4j-api"
+  implementation "com.fasterxml.jackson.datatype:jackson-datatype-hppc"
+  implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+  testImplementation("com.tngtech.archunit:archunit-junit5-api:${archunitJunit5Version}") {
+    exclude group: "org.slf4j", module: "slf4j-api"
+  }
+  testRuntimeOnly("com.tngtech.archunit:archunit-junit5-engine:${archunitJunit5Version}") {
+    exclude group: "org.slf4j", module: "slf4j-api"
+  }
+  implementation "io.micrometer:micrometer-registry-prometheus-simpleclient"
+  runtimeOnly "io.netty:netty-tcnative-boringssl-static"
+  testImplementation "io.projectreactor.tools:blockhound-junit-platform:${blockhoundJunitPlatformVersion}"
+  implementation "jakarta.annotation:jakarta.annotation-api"
+  implementation "org.apache.commons:commons-lang3"
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+  implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+  annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+  implementation "org.springframework.boot:spring-boot-loader-tools"
+  implementation "org.springframework.boot:spring-boot-starter-actuator"
+  implementation "org.springframework.boot:spring-boot-starter-aop"
+  implementation "org.springframework.boot:spring-boot-starter-logging"
+  implementation "org.springframework.boot:spring-boot-starter-mail"
+  implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
+  implementation "org.springframework.boot:spring-boot-starter-security"
+  testImplementation "org.springframework.boot:spring-boot-starter-test"
+  implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+  implementation "org.springframework.boot:spring-boot-starter-validation"
+  implementation "org.springframework.boot:spring-boot-starter-webflux"
+  testImplementation "org.springframework.boot:spring-boot-test"
+  implementation "org.springframework.data:spring-data-commons"
+  testImplementation "org.springframework.security:spring-security-test"
+  implementation(libs.commons.beanutils) {
+    exclude group: 'commons-logging', module: 'commons-logging'
+  }
+  implementation libs.jhipster.framework
+  implementation libs.springdoc.openapi.starter.webflux.api
+  implementation "org.springframework.boot:spring-boot-starter-data-r2dbc"
+  implementation "com.fasterxml.jackson.module:jackson-module-jaxb-annotations"
+  implementation "com.zaxxer:HikariCP"
+  implementation "jakarta.persistence:jakarta.persistence-api"
+  implementation "org.postgresql:postgresql"
+  implementation "org.postgresql:r2dbc-postgresql"
+  testImplementation "org.testcontainers:jdbc"
+  testImplementation "org.testcontainers:junit-jupiter"
+  testImplementation "org.testcontainers:postgresql"
+  testImplementation "org.testcontainers:testcontainers"
+  annotationProcessor "org.glassfish.jaxb:jaxb-runtime"
+  developmentOnly "org.springframework.boot:spring-boot-docker-compose"
+  // jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
+  OperatingSystem os = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.getCurrentOperatingSystem();
+  Architecture arch = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.getCurrentArchitecture();
+  if (os.isMacOsX() && !arch.isAmd64()) {
+    implementation("io.netty:netty-resolver-dns-native-macos") {
+      artifact {
+        classifier = "osx-aarch_64"
+      }
     }
-    testRuntimeOnly("com.tngtech.archunit:archunit-junit5-engine:${archunitJunit5Version}") {
-        exclude group: "org.slf4j", module: "slf4j-api"
-    }
-    implementation "io.micrometer:micrometer-registry-prometheus-simpleclient"
-    runtimeOnly "io.netty:netty-tcnative-boringssl-static"
-    testImplementation "io.projectreactor.tools:blockhound-junit-platform:${blockhoundJunitPlatformVersion}"
-    implementation "jakarta.annotation:jakarta.annotation-api"
-    implementation "org.apache.commons:commons-lang3"
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-    implementation "org.springframework.boot:spring-boot-loader-tools"
-    implementation "org.springframework.boot:spring-boot-starter-actuator"
-    implementation "org.springframework.boot:spring-boot-starter-aop"
-    implementation "org.springframework.boot:spring-boot-starter-logging"
-    implementation "org.springframework.boot:spring-boot-starter-mail"
-    implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
-    implementation "org.springframework.boot:spring-boot-starter-security"
-    testImplementation "org.springframework.boot:spring-boot-starter-test"
-    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
-    implementation "org.springframework.boot:spring-boot-starter-validation"
-    implementation "org.springframework.boot:spring-boot-starter-webflux"
-    testImplementation "org.springframework.boot:spring-boot-test"
-    implementation "org.springframework.data:spring-data-commons"
-    testImplementation "org.springframework.security:spring-security-test"
-    implementation(libs.commons.beanutils) {
-        exclude group: 'commons-logging', module: 'commons-logging'
-    }
-    implementation libs.jhipster.framework
-    implementation libs.springdoc.openapi.starter.webflux.api
-    implementation "org.springframework.boot:spring-boot-starter-data-r2dbc"
-    implementation "com.fasterxml.jackson.module:jackson-module-jaxb-annotations"
-    implementation "com.zaxxer:HikariCP"
-    implementation "jakarta.persistence:jakarta.persistence-api"
-    implementation "org.postgresql:postgresql"
-    implementation "org.postgresql:r2dbc-postgresql"
-    testImplementation "org.testcontainers:jdbc"
-    testImplementation "org.testcontainers:junit-jupiter"
-    testImplementation "org.testcontainers:postgresql"
-    testImplementation "org.testcontainers:testcontainers"
-    annotationProcessor "org.glassfish.jaxb:jaxb-runtime"
-    developmentOnly "org.springframework.boot:spring-boot-docker-compose"
-    // jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
-    OperatingSystem os = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.getCurrentOperatingSystem();
-    Architecture arch = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.getCurrentArchitecture();
-    if (os.isMacOsX() && !arch.isAmd64()) {
-        implementation("io.netty:netty-resolver-dns-native-macos") {
-            artifact {
-                classifier = "osx-aarch_64"
-            }
-        }
-    }
+  }
+
+  implementation(libs.kotlin.reflect)
+  implementation(libs.kotlin.stdlib.jdk8)
+  implementation(libs.kotlinx.coroutines.core)
+  implementation(libs.kotlinx.serialization.json)
+
+  testImplementation(libs.kotlin.test)
+  testImplementation(libs.kotlin.test.junit5)
+  testImplementation(libs.mockito.kotlin)
+
+  implementation(libs.arrow.core)
+  implementation(libs.arrow.fx.coroutines)
+  implementation(libs.arrow.integrations.jackson.module)
+
+  implementation(libs.reactor.kotlin.extensions)
+  implementation(libs.kotlinx.coroutines.reactor)
+  implementation(libs.jackson.module.kotlin)
+  implementation(libs.jgit.core)
+  implementation(libs.jgit.archive)
+  implementation(libs.jgit.ssh)
+  implementation(libs.langchain4j.core)
+  implementation(libs.langchain4j.reactor)
+  implementation(libs.langchain4j.spring.boot.starter)
+  implementation(libs.langchain4j.ollama.spring.boot.starter)
+  implementation(libs.langchain4j.hugging.face)
+  implementation(libs.langchain4j.mistral.ai)
+  implementation(libs.langchain4j.web.search.engine.google.custom)
+  implementation(libs.langchain4j.google.ai.gemini)
+  implementation(libs.langchain4j.pgvector)
+  testImplementation(libs.langchain4j.spring.boot.tests)
+//    implementation("dev.langchain4j:langchain4j-document-parser-apache-pdfbox:${properties["langchain4j.version"]}")
+//    implementation("dev.langchain4j:langchain4j-easy-rag:${properties["langchain4j.version"]}")
+//    implementation("dev.langchain4j:langchain4j-vertex-ai-gemini-spring-boot-starter:${properties["langchain4j.version"]}")
+//    implementation("dev.langchain4j:langchain4j-vertex-ai:${properties["langchain4j.version"]}")
+//    implementation("dev.langchain4j:langchain4j-vertex-ai-gemini:${properties["langchain4j.version"]}")
 }
 
+kotlin.compilerOptions
+  .freeCompilerArgs
+  .addAll("-Xjsr305=strict")
+
 task cleanResources(type: Delete) {
-    delete "build/resources"
+  delete "build/resources"
 }
 
 
