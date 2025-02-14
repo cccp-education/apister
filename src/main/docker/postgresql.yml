@@ -1,12 +1,12 @@
 # This configuration is intended for development purpose, it's **your** responsibility to harden it for production
-name: apiapp
+name: apister
 services:
   postgresql:
     image: postgres:17.2
     # volumes:
-    #   - ~/volumes/jhipster/apiApp/postgresql/:/var/lib/postgresql/data/
+    #   - ~/volumes/jhipster/apister/postgresql/:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=apiApp
+      - POSTGRES_USER=apister
       - POSTGRES_HOST_AUTH_METHOD=trust
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER}']

@@ -14,7 +14,7 @@ jib {
         }
     }
     to {
-        image = "apiapp:latest"
+        image = "apister:latest"
     }
     container {
         entrypoint = ["bash", "-c", "/entrypoint.sh"]

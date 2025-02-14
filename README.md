@@ -1,4 +1,4 @@
-# apiApp
+# apister
 
 This application was generated using JHipster 8.9.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v8.9.0](https://www.jhipster.tech/documentation-archive/v8.9.0).
 
@@ -88,7 +88,7 @@ For further instructions on how to develop with JHipster, have a look at [Using 
 
 ### Packaging as jar
 
-To build the final jar and optimize the apiApp application for production, run:
+To build the final jar and optimize the apister application for production, run:
 
 ```
 ./gradlew -Pprod clean bootJar

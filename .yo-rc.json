@@ -2,7 +2,7 @@
   "generator-jhipster": {
     "applicationType": "monolith",
     "authenticationType": "jwt",
-    "baseName": "apiApp",
+    "baseName": "apister",
     "buildTool": "gradle",
     "cacheProvider": null,
     "clientFramework": "react",

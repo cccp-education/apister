@@ -89,7 +89,7 @@ eclipse {
 defaultTasks "bootRun"
 
 springBoot {
-  mainClass = "api.ApiApp"
+  mainClass = "api.Apister"
 }
 
 test {

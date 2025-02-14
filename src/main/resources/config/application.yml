@@ -91,7 +91,7 @@ management:
 
 spring:
   application:
-    name: apiApp
+    name: apister
   docker:
     compose:
       enabled: false
@@ -125,13 +125,13 @@ spring:
           authorities-claim-name: auth
   task:
     execution:
-      thread-name-prefix: api-app-task-
+      thread-name-prefix: apister-task-
       pool:
         core-size: 2
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: api-app-scheduling-
+      thread-name-prefix: apister-scheduling-
       pool:
         size: 2
   thymeleaf:
@@ -172,7 +172,7 @@ jhipster:
   #   allow-credentials: true
   #   max-age: 1800
   mail:
-    from: apiApp@localhost
+    from: apister@localhost
   api-docs:
     default-include-pattern: /api/**
     management-include-pattern: /management/**

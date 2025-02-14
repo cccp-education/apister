@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "description": "Description for Apister",
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "scripts": {
     "app:start": "./gradlew",
     "app:up": "docker compose -f src/main/docker/app.yml up --wait",

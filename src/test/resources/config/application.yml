@@ -18,8 +18,7 @@ spring:
     name: apister
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
-    contexts: test, faker
-    url: jdbc:postgresql://localhost:5432/apister?currentSchema=dev
+    contexts: test
   jackson:
     serialization:
       write-durations-as-timestamps: false
@@ -29,10 +28,6 @@ spring:
     allow-bean-definition-overriding: true
   messages:
     basename: i18n/messages
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5432/apister?currentSchema=test
-    username: dev
-    password: secret
   security:
     oauth2:
       resourceserver:
@@ -41,13 +36,13 @@ spring:
           authorities-claim-name: auth
   task:
     execution:
-      thread-name-prefix: api-app-task-
+      thread-name-prefix: apister-task-
       pool:
         core-size: 1
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: api-app-scheduling-
+      thread-name-prefix: apister-scheduling-
       pool:
         size: 20
   thymeleaf:
@@ -64,9 +59,9 @@ server:
 # ===================================================================
 jhipster:
   clientApp:
-    name: 'apister'
+    name: 'apisterApp'
   mail:
-    from: apiApp@localhost.com
+    from: apister@localhost.com
     base-url: http://127.0.0.1:8080
   logging:
     # To test json console appender
