@@ -28,36 +28,12 @@ jobs:
           java-version: 17
       - name: Install Node.js packages
         run: npm install
-      - name: Install Snyk CLI
-        run: |
-          curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk
-          chmod +x snyk
-      - name: Snyk test
-        continue-on-error: true
-        run: ./snyk test --all-projects
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      - name: Snyk monitor
-        continue-on-error: true
-        run: ./snyk monitor --all-projects
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Run backend test
         run: |
           chmod +x gradlew
           npm run ci:backend:test
       - name: Run frontend test
         run: npm run ci:frontend:test
-      - name: Analyze code with SonarQube
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          if [ ! -z "$SONAR_TOKEN" ]; then
-              ./gradlew sonarqube --no-daemon -Dsonar.host.url=
-          else
-              echo No SONAR_TOKEN, skipping...
-          fi
       - name: Package application
         run: npm run java:jar:prod
       - name: Build and publish docker image
@@ -65,7 +41,7 @@ jobs:
         run: |
           GIT_TAG=:${GITHUB_REF#refs/tags/}
           DOCKER_TAG=${GIT_TAG#:refs/heads/main}
-          ./gradlew jib -Djib.to.image=cheroliv/apister${DOCKER_TAG} -Djib.to.auth.username="${{ secrets.DOCKER_USERNAME }}" -Djib.to.auth.password="${{ secrets.DOCKER_PASSWORD }}" -Pprod
+          ./gradlew jib -Djib.to.image=jhipster/undefined${DOCKER_TAG} -Djib.to.auth.username="${{ secrets.DOCKER_USERNAME }}" -Djib.to.auth.password="${{ secrets.DOCKER_PASSWORD }}" -Pprod
       - name: 'E2E: Package'
         run: npm run ci:e2e:package
       - name: 'E2E: Prepare'
