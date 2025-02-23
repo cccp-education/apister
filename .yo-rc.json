@@ -19,7 +19,7 @@
     "enableHibernateCache": null,
     "enableSwaggerCodegen": false,
     "enableTranslation": true,
-    "entities": [],
+    "entities": ["Slider"],
     "feignClient": null,
     "gradleEnterpriseHost": null,
     "jhipsterVersion": "8.9.0",

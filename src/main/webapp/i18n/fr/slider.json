@@ -1,0 +1,25 @@
+{
+  "apisterApp": {
+    "slider": {
+      "home": {
+        "title": "Sliders",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Slider",
+        "createOrEditLabel": "Créer ou éditer un Slider",
+        "notFound": "Aucun Slider trouvé"
+      },
+      "created": "Un nouveau Slider a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Slider avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Slider avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Slider {{ id }} ?"
+      },
+      "detail": {
+        "title": "Slider"
+      },
+      "id": "ID",
+      "presentation": "Presentation",
+      "user": "User"
+    }
+  }
+}
